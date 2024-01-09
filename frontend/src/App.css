@@ -1,0 +1,13 @@
+.navbar{
+    height: 6vh;
+}
+.home{
+    height: 94vh;
+}
+.details{
+    height:92vh;
+}
+
+.scbar::-webkit-scrollbar {
+    display: none;
+  }
