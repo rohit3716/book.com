@@ -1,11 +1,10 @@
 import '../css/card.css'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setOneBook } from '../redux/slices/Onebook'
 
 
 const Card = ({book}) => {
-    const {user} = useSelector((state) => state.user);
 
     const navigate=useNavigate();
     const dispatch=useDispatch();
