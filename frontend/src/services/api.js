@@ -1,4 +1,4 @@
-const BASE_URL = "/api/v1"
+const BASE_URL = "https://book-com-slai.onrender.com/api/v1"
 
 export const api={
     SIGNUP_API: BASE_URL + "/signup",

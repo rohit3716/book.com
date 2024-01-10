@@ -1,6 +1,6 @@
 import {apiConnector} from "../apiConnect"
 import {api} from "../api";
-import { setBooksData, setUserBooks } from "../../redux/slices/BooksDataSlice";
+import { setBooksData, setUserBooks, setLoading } from "../../redux/slices/BooksDataSlice";
 import toast from "react-hot-toast";
 // import {setBooksData} from "../../redux/slices/BooksDataSlice";
 
@@ -17,8 +17,11 @@ export function booksData(){
             if (!response.data.success) {
                 throw new Error(response.data.message)
                 }
+            // dispatch(setLoading(true));
+            // toast.loading("Loading....")
                 // console.log(response.data)
                 dispatch(setBooksData(response.data.data))
+            // dispatch(setLoading(false));
         }
         catch(error){
             console.log("LISTING BOOK  API ERROR............", error)

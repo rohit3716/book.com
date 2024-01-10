@@ -17,6 +17,7 @@ export const BooksDataSlice = createSlice({
       },
       setLoading: (state, action) => {
         state.loading = action.payload;
+        console.log("loading of books data", state.loading);
       },
       setUserBooks:( state, action ) =>{
         state.userBooks = action.payload;

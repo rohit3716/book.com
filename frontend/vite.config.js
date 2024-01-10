@@ -2,10 +2,6 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-export default defineConfig({server:{
-  proxy:{
-    '/api':'https://book-com-slai.onrender.com/',
-   }
-  },
+export default defineConfig({
   plugins: [react()],
 })
