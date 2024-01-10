@@ -11,7 +11,7 @@ const cors = require('cors');
 
 
 require('dotenv').config();
-const PORT = process.env.VITE_PORT;
+const PORT = process.env.PORT || 4000;
 
 
 //DB connect
@@ -22,7 +22,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
     cors({
-        origin:"https://book-com-slai.onrender.com/api/v1",
+        origin:"*",
         credentials:true,
     })
 )
