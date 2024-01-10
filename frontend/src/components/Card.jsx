@@ -1,4 +1,4 @@
-import '../css/card.css'
+import './card.css'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import { setOneBook } from '../redux/slices/Onebook'
