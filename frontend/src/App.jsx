@@ -25,7 +25,7 @@ function App() {
     useEffect(() => {
         dispatch(booksData());
         // console.log("asjkdhfkj");
-    }, [dispatch])
+    })
 
     return (
         <div
