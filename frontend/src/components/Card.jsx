@@ -14,7 +14,6 @@ const Card = ({ book }) => {
 
   return (
     <div className=" dark:bg-gray-800 dark:border-gray-700 w-72 font-bold m-2">
-      <div className="wrapper">
         <div className="card">
           <div className="book-image" onClick={handleOnClick}>
             <img src={book.image} alt={book.name} className="image" />
@@ -31,7 +30,6 @@ const Card = ({ book }) => {
             Buy Now
           </button>
         </div>
-      </div>
     </div>
   );
 };

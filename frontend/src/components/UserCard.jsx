@@ -19,7 +19,7 @@ function UserCard({book}) {
   return (
     <div>
       <div className=' dark:bg-gray-800 dark:border-gray-700 w-72 font-bold m-2'>
-            <div className='wrapper'>
+            <div>
                 <div className='card'>
                     <div className='book-image'>
                         <img src={book.image} alt={book.name} className='image'/>
