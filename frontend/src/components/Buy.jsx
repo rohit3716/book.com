@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useNavigate } from 'react-router-dom'
 
 const Buy = () => {
@@ -7,7 +7,7 @@ const Buy = () => {
         <div className='text-gray-900'>
             <div className="w-full md:w-96 md:max-w-full mx-auto mt-4">
                 <div className="p-6 border border-gray-300 sm:rounded-md bg-gray-700">
-                    <form method="#" onSubmit={(e)=>{e.preventDefault(); navigate("/"); }}>
+                    <form method="#" onSubmit={(e)=>{e.preventDefault(); navigate("/") }}>
                         <label className="block mb-6">
                             <span className="text-white">Your name</span>
                             <input

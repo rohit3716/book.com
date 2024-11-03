@@ -32,13 +32,13 @@ function App() {
             className='  scbar text-white dark:bg-gray-900 h-dvh overflow-scroll scbar '>
             <Navbar/>
             <Routes>
-                <Route exact="exact" path="/signup" element={<SignUp/>}></Route>
+                <Route exact="exact" path="/signup" element={<SignUp/>} />
 
-                <Route exact="exact" path="/login" element={<Login/>}></Route>
+                <Route exact="exact" path="/login" element={<Login/>} />
 
-                <Route exact="exact" path="/" element={<Home/>}></Route>
-                <Route exact="exact" path="/details" element={<Details/>}></Route>
-                <Route exact="exact" path="/buy" element={<Buy/>}></Route>
+                <Route exact="exact" path="/" element={<Home/>} />
+                <Route exact="exact" path="/details" element={<Details/>}/>
+                <Route exact="exact" path="/buy" element={<Buy/>}/>
                 <Route element={
                     <PrivateRoute>
                         <Sell/>

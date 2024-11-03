@@ -1,28 +1,40 @@
-import React from "react";
+
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { sell, updateBook } from "../services/operations/sellApi";
 import { booksData, userBooks } from "../services/operations/booksDataApi";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { setEditBook } from "../redux/slices/Onebook";
 
 // {TODO: Fix /sell route }
 
 const Sell = () => {
   const { editBook } = useSelector((state) => state.oneBook);
+
   // console.log("editBook Data",editBook);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [formData, setFormData] = useState({
-    name: !editBook?"":(editBook.name),
-    image: !editBook?"":(editBook.image),
-    author: !editBook?"":(editBook.author),
-    publishYear: !editBook?"":(editBook.publishYear),
-    description: !editBook?"":(editBook.description),
-    actualPrice: !editBook?"":(editBook.actualPrice),
-    sellingPrice: !editBook?"":(editBook.sellingPrice),
-    bookCondition: !editBook?"":(editBook.bookCondition),
+    name: !editBook ? "" : (editBook.name),
+    image: !editBook ? "" : (editBook.image),
+    author: !editBook ? "" : (editBook.author),
+    publishYear: !editBook ? "" : (editBook.publishYear),
+    description: !editBook ? "" : (editBook.description),
+    actualPrice: !editBook ? "" : (editBook.actualPrice),
+    sellingPrice: !editBook ? "" : (editBook.sellingPrice),
+    bookCondition: !editBook ? "Good" : (editBook.bookCondition),
   });
+  //   const resetFormData = setFormData({
+  //   name:  "",
+  //   image: "" ,
+  //   author:  "" ,
+  //   publishYear: "",
+  //   description: "",
+  //   actualPrice:"",
+  //   sellingPrice: "",
+  //   bookCondition: "Good"
+  // });
 
   const {
     name,
@@ -32,6 +44,7 @@ const Sell = () => {
     description,
     actualPrice,
     sellingPrice,
+    bookCondition
   } = formData;
 
   const handleOnChange = (e) => {
@@ -45,15 +58,16 @@ const Sell = () => {
   const handleOnSubmit = async (e) => {
     e.preventDefault();
     !editBook && (dispatch(sell(
-          formData.name,
-          formData.image,
-          formData.author,
-          formData.publishYear,
-          formData.description,
-          formData.actualPrice,
-          formData.sellingPrice,
-          formData.bookCondition,
-    )) )
+      formData.name,
+      formData.image,
+      formData.author,
+      formData.publishYear,
+      formData.description,
+      formData.actualPrice,
+      formData.sellingPrice,
+      formData.bookCondition,
+    )));
+
     editBook && dispatch(updateBook(
       editBook._id,
       formData.name,
@@ -64,7 +78,7 @@ const Sell = () => {
       formData.actualPrice,
       formData.sellingPrice,
       formData.bookCondition,
-))
+    ))
     // (!editBook)
     //   ? dispatch(sell(
     //       formData.name,
@@ -87,28 +101,56 @@ const Sell = () => {
     //       formData.bookCondition
     //     );
     //   )
-  
-    dispatch(booksData());
-  
+
+    await dispatch(booksData());
+
     setFormData({
-      name: "",
-      image: "",
-      author: "",
+      name:  "",
+      image: "" ,
+      author:  "" ,
       publishYear: "",
       description: "",
-      actualPrice: "",
+      actualPrice:"",
       sellingPrice: "",
-      bookCondition: "",
+      bookCondition: "Good"
     });
-    dispatch(userBooks());
+    await dispatch(userBooks());
     navigate("/getUserBooks")
   };
-  
+
+
+
   return (
     <div className="scbar home overflow-scroll">
       <section className="  ">
         <div className="py-8 px-4 mx-auto max-w-2xl lg:py-16">
-          <h2 className="mb-4 text-xl font-bold  ">Add a new Book</h2>
+          <div className=" m-8 grid grid-cols-3 gap-1 justify-evenly">
+            {/* <div className="bg-green-500 col-span-2 rounded-lg h-12">4</div>  */}
+            {/* <div className="bg-green-300 rounded-lg h-12">5</div> */}
+            <h2 className="mb-4 col-span-2 text-xl font-bold  ">{ editBook? `Update Book: ${name}` : `Add a new Book`}</h2>
+            
+            {editBook && <button
+              type="submit"
+              className=" px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center dark:bg-gray-600 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-green-400 cursor-pointer"
+              onClick={() => {
+                dispatch(setEditBook(null))
+                setFormData({
+                    name:  "",
+                    image: "" ,
+                    author:  "" ,
+                    publishYear: "",
+                    description: "",
+                    actualPrice:"",
+                    sellingPrice: "",
+                    bookCondition: "Good"
+                  });
+                }}
+            >
+              Add New Book
+            </button>} 
+          </div>
+
+
           <form action="#" onSubmit={handleOnSubmit}>
             <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
               <div className="sm:col-span-2">
@@ -196,7 +238,7 @@ const Sell = () => {
                   required="required"
                   className="bg-gray-50 border border-gray-300 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                   onChange={handleOnChange}
-                  defaultValue="Good" // Set the default value to "Good"
+                  defaultValue={bookCondition}
                 >
                   <option disabled hidden>
                     Select condition
@@ -270,12 +312,12 @@ const Sell = () => {
             >
               Add Book
             </button> */}
-            {editBook?(<button
+            {editBook ? (<button
               type="submit"
               className="flex  m-auto items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center dark:bg-gray-600 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-green-400 cursor-pointer"
             >
               Update Book
-            </button>):(<button
+            </button>) : (<button
               type="submit"
               className="flex  m-auto items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center dark:bg-gray-600 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-green-400 cursor-pointer"
             >

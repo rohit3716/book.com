@@ -24,7 +24,6 @@ const Navbar = () => {
         dispatch(setUserBooks([]))
         toast.success("Logged Out");
         navigate("/login")
-
         
     }
     // console.log("2jdsf", isLoggedIn);
