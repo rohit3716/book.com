@@ -8,8 +8,6 @@ export const store = configureStore({
     user:UserSlice,
     booksData: BooksDataSlice,
     oneBook: oneBookSlice
-    // listBar: listBarSlice,
-    // messageBox: messageBoxSlice,
   },
 });
 export default store;

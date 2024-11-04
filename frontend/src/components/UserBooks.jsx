@@ -8,7 +8,7 @@ function UserBooks() {
     // console.log();
   return (
     <div>
-      <div className='home   px-16 '>
+      <div className='  px-16 '>
         <div className='  h-full py-2 flex flex-wrap m-auto justify-center overflow-scroll scbar'>
             {
               userBooks && userBooks.map( (book) => <UserCard key={book._id} book={book} />)

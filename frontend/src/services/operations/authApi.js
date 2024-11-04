@@ -1,5 +1,5 @@
-import {apiConnector} from "../apiConnect"
-import {api} from "../api";
+import { apiConnector } from "../apiConnect"
+import { api } from "../api";
 import { setIsLoggedIn, setUser, setToken } from "../../redux/slices/UserSlice";
 import { userBooks } from "./booksDataApi";
 import toast from "react-hot-toast";
@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 const {
     SIGNUP_API,
     LOGIN_API
-}=api
+} = api
 
 export function signup(
     firstName,
@@ -18,12 +18,10 @@ export function signup(
     password,
     confirmPassword,
     navigate
-)
+) {
 
-{
-    
-    return async ()=>{
-        
+    return async () => {
+
         // console.log({
         //   firstName,
         //   lastName,
@@ -32,9 +30,9 @@ export function signup(
         //   password,
         //   confirmPassword,
         // })
-        try{
+        try {
             // console.log("Shekhar")
-            const response= await apiConnector("POST", SIGNUP_API, {
+            const response = await apiConnector("POST", SIGNUP_API, {
                 firstName,
                 lastName,
                 email,
@@ -43,24 +41,24 @@ export function signup(
                 confirmPassword,
             })
 
-            
+
             // console.log("Signup api resonse..................", response)
-    
+
             if (!response.data.success) {
                 throw new Error(response.data.message)
-                }
-                // console.log(response.data)
-                toast.success('User Registered successfully');
-                navigate('/login')
+            }
+            // console.log(response.data)
+            toast.success('User Registered successfully');
+            navigate('/login')
         }
         catch (error) {
             console.log("SIGNUP API ERROR............", error)
             toast.error("Signup Failed")
-            }
-
-            // dispatch(setLoading(false))
-            // toast.dismiss(toastId)
         }
+
+        // dispatch(setLoading(false))
+        // toast.dismiss(toastId)
+    }
 }
 
 
@@ -68,28 +66,26 @@ export function login(
     email,
     password,
     navigate
-)
+) {
 
-{
-    
-    return async (dispatch)=>{
-        
+    return async (dispatch) => {
+
         // console.log({
         //   email,
         //   password,
         // })
-        try{
+        try {
             // console.log("Shekhar")
-            const response= await apiConnector("POST", LOGIN_API, {
+            const response = await apiConnector("POST", LOGIN_API, {
                 email,
                 password,
             })
             // console.log("LOGIN api resonse..................", response)
-    
+
             if (!response.data.success) {
                 throw new Error(response.data.message)
-                }
-                // console.log(response.data)
+            }
+            // console.log(response.data)
             dispatch(setUser(response.data.user));
             dispatch(setIsLoggedIn(true));
             dispatch(setToken(response.data.token));
@@ -100,10 +96,10 @@ export function login(
         catch (error) {
             console.log("LOGIN API ERROR............", error)
             toast.error("LOGIN Failed")
-            }
-            // dispatch(setLoading(false))
-            // toast.dismiss(toastId)
         }
+        // dispatch(setLoading(false))
+        // toast.dismiss(toastId)
+    }
 }
 
 // export function logout(navigate) {
